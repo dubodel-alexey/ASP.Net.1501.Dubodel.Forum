@@ -1,0 +1,32 @@
+﻿@model MvcPL.ViewModels.CategoryViewModel
+
+@{
+    ViewBag.Title = "Category";
+}
+
+<h2>Category</h2>
+
+<div class="bordered">
+    @if (Model.ParentCategory == null)//to childaction
+    {
+        @Html.RouteLink("Forum", "ForumRoot")
+    }
+    else
+    {
+        @Html.ActionLink(Model.ParentCategory.Name, "Index", new { id = Model.ParentCategory.Id })
+    }
+</div>
+<div class="bordered">
+    @if (User.IsInRole("admin"))
+    {
+        @Html.ActionLink("Create Category", "Create", new { id = Model.Id })
+    }
+    @if (Model.Id != null)
+    {
+        @Html.ActionLink("Create Topic", "Create", "Topic", new { id = Model.Id }, null)
+    }
+</div>
+
+@Html.Action("CategoriesList", new { id = Model.Id })
+@Html.Action("TopicsList", new { id = Model.Id })
+

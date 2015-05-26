@@ -1,0 +1,34 @@
+﻿@using MvcPL.ViewModels
+@model List<CommentViewModel>
+
+@if (Model != null && Model.Count() != 0)
+{
+    foreach (CommentViewModel comment in Model)
+    {
+        <div class="bordered">
+            <div>
+                <div>
+                    
+                    @*@Html.ActionLink(comment.User.Login, "Index", "User", new {id = comment.User.Id}, null)*@
+                    @comment.User.Login<br />
+                    @comment.User.RegisteredTime<br />
+                    @comment.User.Role<br />
+                </div>
+                <div>
+                    <div>
+                        @comment.Body
+                    </div>
+                    @comment.Time<br />
+                    @Html.ActionLink("#" + comment.Id, "Id", "Comment", new { id = comment.Id }, new { target = "_blank" })
+                </div>
+                @if ((comment.Id != Model.First().Id) &&
+             (User.IsInRole("moderator") || User.IsInRole("admin") || User.Identity.Name.Equals(comment.User.Login)))
+                {
+                    <div>
+                        @Html.ActionLink("Delete", "Delete", "Comment", new { id = comment.Id }, null)
+                    </div>
+                }
+            </div>
+        </div>
+    }
+}

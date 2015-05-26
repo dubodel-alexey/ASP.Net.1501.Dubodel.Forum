@@ -1,0 +1,23 @@
+﻿@model MvcPL.ViewModels.CommentCreateViewModel
+
+@using (Html.BeginForm("Create", "Comment"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        @Html.HiddenFor(model => model.TopicId, new { Value = ViewBag.topicId })
+        <div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CommentBody)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CommentBody)
+                @Html.ValidationMessageFor(model => model.CommentBody)
+            </div>
+        </div>
+        <div>
+            <input type="submit" value="Отправить" />
+        </div>
+    </fieldset>
+}

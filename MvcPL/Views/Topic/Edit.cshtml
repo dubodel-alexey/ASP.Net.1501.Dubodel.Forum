@@ -1,0 +1,30 @@
+﻿@model MvcPL.ViewModels.TopicUpdateViewModel
+
+@{
+    ViewBag.Title = "Edit Topic";
+}
+
+<h2>Edit Topic</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Create category</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        @Html.HiddenFor(model => model.Id, new { Value = Model.Id })
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}

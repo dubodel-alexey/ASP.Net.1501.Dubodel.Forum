@@ -1,0 +1,36 @@
+﻿@model MvcPL.ViewModels.TopicCreateViewModel
+
+@{
+    ViewBag.Title = "Create Topic";
+}
+
+<h2>Create Topic</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Create category</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CommentBody)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CommentBody)
+            @Html.ValidationMessageFor(model => model.CommentBody)
+        </div>
+        @Html.HiddenFor(model => model.ParentCategoryId, new { Value = ViewBag.ParentCategoryId })
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}

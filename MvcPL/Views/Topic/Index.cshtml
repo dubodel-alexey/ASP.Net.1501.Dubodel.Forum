@@ -1,0 +1,25 @@
+﻿@model MvcPL.ViewModels.TopicViewModel
+
+@{
+    ViewBag.Title = "Topic";
+}
+
+<h2>Topic</h2>
+
+<div class="bordered">
+    @if (Model.ParentCategory == null)//to childaction
+    {
+        @Html.RouteLink("Forum", "ForumRoot");
+    }
+    else
+    {
+        @Html.ActionLink(Model.ParentCategory.Name, "Index", "Category", new { id = Model.ParentCategory.Id }, null);
+    }
+</div>
+
+<div>@Model.Name</div>
+@Html.Action("CommentsList", new { id = Model.Id })
+@if (User.Identity.IsAuthenticated)
+{
+    @Html.Action("Create", "Comment", new { topicId = Model.Id })
+}

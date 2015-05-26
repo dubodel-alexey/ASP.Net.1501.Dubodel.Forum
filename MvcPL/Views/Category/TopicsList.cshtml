@@ -1,0 +1,21 @@
+﻿@using MvcPL.ViewModels
+@model IEnumerable<TopicHeadViewModel>
+
+
+@if (Model != null && Model.Count() != 0)
+{
+    <div class="bordered">
+        @foreach (TopicHeadViewModel topic in Model)
+        {
+            <div>
+                @Html.ActionLink(topic.Name, "Index", "Topic", new { id = topic.Id }, null)
+                @if (User.IsInRole("moderator") || User.IsInRole("admin") || User.Identity.Name.Equals(topic.CreatorLogin))
+                {
+                    @Html.ActionLink("Edit", "Edit", "Topic", new { id = topic.Id }, null)
+                    @Html.ActionLink("Delete", "Delete", "Topic", new { id = topic.Id }, null)
+                }
+            </div>
+        }
+    </div>
+}
+

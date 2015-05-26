@@ -1,0 +1,21 @@
+﻿@model MvcPL.ViewModels.CommentFullViewModel
+
+@{
+    ViewBag.Title = "Comment";
+}
+
+<h2>Comment</h2>
+
+<div>
+    @Html.ActionLink(@Model.Topic.Name, "Index", "Topic", new {id = Model.Topic.Id}, null)
+</div>
+<div class="bordered">
+    <div>
+        @Model.User.Login<br />
+        @Model.User.RegisteredTime<br />
+        @Model.User.Role<br />
+    </div>
+    <div>
+        @Model.Body
+    </div>
+</div>

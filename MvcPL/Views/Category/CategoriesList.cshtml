@@ -1,0 +1,22 @@
+﻿@using MvcPL.ViewModels
+@model IEnumerable<CategoryHeadViewModel>
+@if (Model != null && Model.Count() != 0)
+{
+    <div class="bordered">
+        @foreach (CategoryHeadViewModel category in Model)
+        {
+            <div>
+                @if (!category.ForRegistered || (category.ForRegistered && User.Identity.IsAuthenticated))
+                {
+                    @Html.ActionLink(category.Name, "Index", new { id = category.Id })
+                    if (User.IsInRole("admin"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = category.Id })
+                        @Html.ActionLink("Delete", "Delete", new { id = category.Id })
+                    }
+                }
+            </div>
+        }
+    </div>
+
+}
